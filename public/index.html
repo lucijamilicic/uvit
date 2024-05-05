@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Studentski sistem</title>
+
+    <link rel="stylesheet" type="text/css" href="/index.css" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="/">Početna</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Studentski sistem</h1>
+
+        <form id="getForm" action="/student" method="POST">
+            <div class="form-group">
+                <label for="username">Korisničko ime</label>
+                <input type="text" id="username" name="username" class="field">
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Lozinka</label>
+                <input type="password" id="password" name="password" class="field">
+            </div>
+
+            <input type="submit" value="Uloguj se na sistem" class="btn">
+        </form>
+    </main>
+
+    <script src="/js/index.js"></script>
+</body>
+
+</html>

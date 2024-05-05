@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studentska stranica</title>
+    <link type="text/css" rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1><%= title %></h1>
+    <table>
+        <tr>
+            <td>Username</td>
+            <td><%= student.username %></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><%= student.password %></td>
+        </tr>
+        <tr>
+            <td>Ime</td>
+            <td><%= student.ime %></td>
+        </tr>
+        <tr>
+            <td>Smer</td>
+            <td><%= student.smer %></td>
+        </tr>
+    </table>
+
+    <ul>
+        <% for(let ocena of ocene ) { %>
+            <li><%= ocena %> </li>
+        <% } %>
+    </ul>
+
+
+    <h2>Izmeni podatke</h2>
+    <form id="izmeni" method="POST" action="/student/update">
+
+        <input type="hidden" name="username" value="<%= student.username %>">
+
+        <div class="form-group">
+            <label for="ime">Ime</label>
+            <input type="text" id="ime" name="ime" class="field">
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="form-label">Lozinka</label>
+            <input type="password" id="password" name="password" class="field">
+        </div>
+
+        <select name="smer">
+            <option value="Informatika" selected>I</option>
+            <option value="Racunarstvo">R</option>
+            <option value="Verovatnoca">V</option>
+        </select>
+
+        <input type="submit" value="Izmeni" class="btn">
+    </form>
+
+    <h2>Obrisi nalog</h2>
+    <form id="obrisi" method="POST" action="/student/delete/<%= student.username %>">
+        <!-- <div class="form-group">
+            <label for="password" class="form-label">Potvrdi lozinku</label>
+            <input type="password" id="password" name="password" class="field">
+        </div> -->
+
+        <input type="submit" value="Obrisi">
+    </form>
+    
+</body>
+</html>
