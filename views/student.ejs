@@ -19,11 +19,19 @@
         </tr>
         <tr>
             <td>Ime</td>
-            <td><%= student.ime %></td>
+            <td><%= student.name %></td>
+        </tr>
+        <tr>
+            <td>Prezime</td>
+            <td><%= student.surname %></td>
         </tr>
         <tr>
             <td>Smer</td>
-            <td><%= student.smer %></td>
+            <td><%= student.major %></td>
+        </tr>
+        <tr>
+            <td>Prosecna ocena</td>
+            <td><%= student.avg_grade %></td>
         </tr>
     </table>
 
@@ -40,8 +48,13 @@
         <input type="hidden" name="username" value="<%= student.username %>">
 
         <div class="form-group">
-            <label for="ime">Ime</label>
-            <input type="text" id="ime" name="ime" class="field">
+            <label for="name">Ime</label>
+            <input type="text" id="name" name="name" class="field">
+        </div>
+
+        <div class="form-group">
+            <label for="surname">Prezime</label>
+            <input type="text" id="surname" name="surname" class="field">
         </div>
 
         <div class="form-group">
@@ -49,23 +62,30 @@
             <input type="password" id="password" name="password" class="field">
         </div>
 
-        <select name="smer">
-            <option value="Informatika" selected>I</option>
-            <option value="Racunarstvo">R</option>
-            <option value="Verovatnoca">V</option>
+        <select name="major">
+            <option value="Informatika" selected>Informatika</option>
+            <option value="Racunarstvo">Racunarstvo</option>
+            <option value="Statistika">Statistika</option>
+            <option value="Primenjena matematika">Primenjena matematika</option>
+            <option value="Teorijska matematika">Teorijska matematika</option>
         </select>
 
         <input type="submit" value="Izmeni" class="btn">
     </form>
 
-    <h2>Obrisi nalog</h2>
+    <h2>Obrisi nalog</h2> 
     <form id="obrisi" method="POST" action="/student/delete/<%= student.username %>">
-        <!-- <div class="form-group">
+        <div class="form-group">
             <label for="password" class="form-label">Potvrdi lozinku</label>
             <input type="password" id="password" name="password" class="field">
-        </div> -->
+        </div>
 
-        <input type="submit" value="Obrisi">
+        <input type="submit" value="Obrisi" class="btn">
+    </form>
+
+    <form method="GET" action="/exams">
+        <input type="hidden" name="username" value="<%= student.username %>">
+        <input type="submit" value="Prikazi polozene ispite" class="btn">
     </form>
     
 </body>

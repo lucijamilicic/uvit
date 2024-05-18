@@ -1,62 +1,54 @@
-const { use } = require('../app');
 const studentModel = require('../models/student');
 
 
-function getStudentByUsername(req, res, next){
-    const username = req.body.username;
-    const password = req.body.password;
+async function getStudentByUsername(req, res, next){
+    try{    
+        const username = req.body.username;
+        const password = req.body.password;
 
-    let student = studentModel.getStudentByUsername(username);
+        let student = await studentModel.getStudentByUsername(username);
 
-    if(student == null){
-        res.render('error.ejs', {
-            message : "Ne postoji korisnik sa datim korisnickim imenom."
+        if(student == null){
+            throw new Error("Ne postoji korisnik sa datim korisnickim imenom.");
+        }
+
+        if(! await studentModel.isPasswordCorrect(username, password)){
+            throw new Error("Neispravna lozinka.");
+        }
+
+        res.render('student.ejs', {
+            title: 'Dobrodosli, ' + student.name,
+            student,
+            ocene : [7, 8, 9, 7]    
         });
-        return;
+    }catch (err) {
+        next(err);
     }
-
-    if(!studentModel.isPasswordCorrect(username, password)){
-        res.render('error.ejs', {
-            message : "Neispravna lozinka."
-        });
-        return;
-    }
-
-    res.render('student.ejs', {
-        title: 'Dobrodosli, ' + student.ime,
-        student,
-        ocene : [7, 8, 9, 7]    
-    });
 }
 
-function updateStudentInfo(req, res, next){
+async function updateStudentInfo(req, res, next){
     const student = req.body;
 
-    if(studentModel.getStudentByUsername(student.username) == null){
-        res.render('error.ejs', {
-            message : "Ne postoji korisnik sa datim korisnickim imenom."
-        });
-        return;
+    const findStudent = await studentModel.getStudentByUsername(student.username);
+    if( findStudent == null){
+        throw new Error("Ne postoji korisnik sa datim korisnickim imenom.");
     }
 
-    studentModel.updateInfo(student);
+    await studentModel.updateInfo(student);
 
     next();
 }
 
 // localhost:3000/student/delete/:username
-function deleteStudent(req, res, next){
+async function deleteStudent(req, res, next){
     const username = req.params.username;
-    // const password = req.body.password;
+    const password = req.body.password;
 
-    // if(!studentModel.isPasswordCorrect(username, password)){
-    //     res.render('error.ejs', {
-    //         message : "Neispravna lozinka."
-    //     });
-    //     return;
-    // }
+    if(! await studentModel.isPasswordCorrect(username, password)){
+        throw new Error("Neispravna lozinka.");
+    }
 
-    studentModel.deleteStudent(username);
+    await studentModel.deleteStudent(username);
 
     res.redirect('/index.html');
 }
