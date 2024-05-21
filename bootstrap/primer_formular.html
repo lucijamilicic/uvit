@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Studentski sistem</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <div>
+        <div>
+            <div>
+
+            <h1>Kreiraj nalog</h1>
+
+            <form id="getForm" action="/student" method="POST">
+                <div class="form-group">
+                    <label for="username">Korisničko ime</label>
+                    <input type="text" id="username" name="username" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Lozinka</label>
+                    <input type="password" id="password" name="password" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    Smer: 
+                    <div class="form-check form-check-inline" >
+                        <input type="radio" id="smer_i" value="informatika" name="smer">
+                        <label for="smer_i" class="form-check-label">Informatika</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="smer_r" value="racunarstvo" name="smer">
+                        <label for="smer_r" class="form-check-label">Racunarstvo</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="smer_v" value="verovatnoca" name="smer" >
+                        <label for="smer_v" class="form-check-label">Verovatnoca</label>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" name="uslovi" id="uslovi" value="true">
+                        <label for="uslovi" class="form-check-label">Prihvatam uslove koriscenja</label>
+                    </div>
+                </div>
+
+                <input type="submit" value="Registruj se" class="btn btn-primary btn-block">
+                <button class="btn btn-outline-danger btn-block">Ponisti</button>
+            </form>
+
+
+            </div>
+            </div>
+        </div>
+
+</body>
+
+</html>

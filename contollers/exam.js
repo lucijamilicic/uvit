@@ -5,5 +5,6 @@ module.exports.getExamsByUsername = async function (req, res, next){
 
     const exams =  await examModel.getExamsByUsername(username);
 
+    console.log(exams);
     res.render('exam.ejs', {exams});
 }
